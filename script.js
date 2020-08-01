@@ -1,6 +1,6 @@
-const numberButtons = document.querySelectorAll("[data-number]");
+const numberButtons = document.getElementsByClassName(".number-btn");
 const clearBtn = document.querySelector("[data-action-clear");
-const deleteBtn = document.querySelector("[data-action-delete]");
+const deleteBtn = document.querySelector("[data-action-delete");
 const currentValue = document.querySelector("[data-current-value]");
 const previousValue = document.querySelector("[data-previous-value]");
 
@@ -8,20 +8,11 @@ let calcArray = [];
 let displayCurrent = 0;
 let displayPrevious = 0;
 
-for (let i = 0; i < numberButtons.length; i++) {
-  numberButtons[i].addEventListener("click", updateDisplay);
-}
+numberButtons.onclick;
 
 function updateDisplay() {
-  console.log("yes click");
+  console.log("i am clicked");
 }
-
-// numberButtons.forEach((button) => {
-//   btn.addEventListener("click", (event) => {
-//     console.log(event.target);
-//   });
-// });
-
 // operatorButton.forEach((button) => {
 //   button.addEventListener("click", operation, false);
 // });
