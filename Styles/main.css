@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
 body {
@@ -9,7 +9,7 @@ body {
   padding: 0;
   background: linear-gradient(#355c7d, #6c5b7b, #c06c84);
 }
-.calculator-grid {
+.calculator {
   height: 100vh;
   display: grid;
   justify-content: center;

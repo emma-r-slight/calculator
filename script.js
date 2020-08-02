@@ -1,50 +1,92 @@
 //identify buttons when clicked
 let calcArray = [];
-let displayCurrent = 0;
 // const numBtn = document.querySelectorAll('.number-btn');
-let calcScreen = document.querySelector('.screen');
+let screen = document.querySelector('.screen');
 
+const calculator = document.querySelector('.calculator');
 //using event "bubbling" get all calculator buttons
 const keys = document.querySelector('.calculator-keys');
 
-// udate calculator screen evert time button is clicked
-function updateDisplay(e) {
-  clicked = e.target.innerHTML;
-  console.log(clicked);
+// update calculator screen evert time button is clicked
+// function updateDisplay(e) {
+//   clicked = e.target.innerHTML;
+//   console.log(clicked);
 
-  calcScreen.value = calcScreen.value + clicked;
-}
+//   calcScreen.value = calcScreen.value + clicked;
+// }
 
 keys.addEventListener('click', (e) => {
   const clicked = e.target;
-  const operator = clicked.dataset.action;
+  const operand = clicked.dataset.action;
+  const keyValue = clicked.textContent;
+  const currentNum = screen.textContent;
+  // const previousKeyType = calculator.dataset.previousKeyType;
+
+  Array.from(clicked.parentNode.children).forEach((btn) =>
+    btn.classList.remove('is-depressed')
+  );
+
   if (clicked.matches('button')) {
-    if (!operator) {
-      console.log('is number');
+    if (!operand) {
+      if (currentNum === '0' || previousKeyType === calcKey) {
+        screen.textContent = keyValue;
+      } else {
+        screen.textContent = currentNum + keyValue;
+      }
+    }
+    if (operand === 'decimal') {
+      screen.textContent = currentNum + '.';
     }
     if (
-      operator === '+' ||
-      operator === '-' ||
-      operator === '*' ||
-      operator === '/'
+      operand === '+' ||
+      operand === '-' ||
+      operand === '*' ||
+      operand === '/'
     ) {
-      console.log('is operator');
-    }
-    if (operator === 'decimal') {
-      console.log('this is a decimal');
-    }
-    if (operator === 'calculate') console.log('calculate!');
+      keyValue.classList.add('.is-depressed');
 
-    if (operator === 'clear') {
-      console.log('clear');
+      calculator.dataset.previousKeyType = 'calcKey';
+      calculator.dataset.firstValue = currentNum;
+      calculator.dataset.calcKey = operator;
+    }
+    if (operand === 'calculate') {
+      const secondValue = currentNum;
+      const firstValue = calculator.dataset.firstValue;
+      const operator = calculator.dataset.operator;
+
+      if (firstValue && operator && previousKeyType != 'operator') {
+        screen.textContent = calculate(firstValue, operator, secondValue);
+      }
+
+      const calculate = (num1, operator, num2) => {
+        let result = '';
+
+        if (operand === '+') {
+          result = parseFloat(n1) + parseFloat(n2);
+        } else if (operand === '-') {
+          result = parseFloat(n1) - parseFloat(n2);
+        } else if (operand === '*') {
+          result = parseFloat(n1) * parseFloat(n2);
+        } else if (operand === '/');
+        {
+          result = parseFloat(n1) / parseFloat(n2);
+        }
+        return result;
+      };
     }
   }
 });
 
+//     if (operand === 'clear') {
+//       console.log('clear');
+//     }
+//   }
+// });
+
 //!!! This worked but wanted a more simple way of identifying different keys so changed to data attributes...
 
-//   if (e.target.classList.contains('key--operator')) {
-//     console.log('operator');
+//   if (e.target.classList.contains('key--operand')) {
+//     console.log('operand');
 //   }
 //   if (e.target.classList.contains('decimal')) {
 //     console.log('Decimal');
@@ -67,8 +109,8 @@ keys.addEventListener('click', (e) => {
 //   return;
 // }
 
-// if (target.classList.contains("operator")) {
-//   console.log("operator", target.value);
+// if (target.classList.contains("operand")) {
+//   console.log("operand", target.value);
 //   return;
 // }
 
