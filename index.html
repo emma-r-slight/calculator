@@ -4,33 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/main.css" />
+
     <title>Calculator</title>
   </head>
   <body>
-    <div class="calculator-grid">
-      <div class="output">
-        <!-- <div class="previous-value"></div> -->
-        <div class="current-value"></div>
-      </div>
+    <div id="calculator-grid">
+      <!-- <div class="previous-value"></div> -->
+      <input type="text" class="screen" value="0" disabled />
 
-      <button data-action-clear class="span2">AC</button>
-      <button data-action-delete>DEL</button>
-      <button class="key--operator" data-action="add">+</button>
-      <button class="number=btn">7</button>
-      <button class="number=btn">8</button>
-      <button class="number=btn">9</button>
-      <button class="key--operator" data-action="minus">-</button>
-      <button class="number=btn">4</button>
-      <button class="number=btn">5</button>
-      <button class="number=btn">6</button>
-      <button class="key--operator" data-action="multiply">&times;</button>
-      <button class="number=btn">1</button>
-      <button class="number=btn">2</button>
-      <button class="number=btn">3</button>
-      <button class="key--operator" data-action="divide">÷</button>
-      <button class="number=btn">0</button>
-      <button data-action="decimal">.</button>
-      <button class="key--equal span2" data-action-equals>=</button>
+      <div class="calculator-keys">
+        <button class="clear span2">AC</button>
+        <button class="delete">DEL</button>
+        <button class="key--operator" value="+">+</button>
+        <button class="number-btn">7</button>
+        <button class="number-btn">8</button>
+        <button class="number-btn">9</button>
+        <button class="key--operator" value="-">-</button>
+        <button class="number-btn">4</button>
+        <button class="number-btn">5</button>
+        <button class="number-btn">6</button>
+        <button class="key--operator" value="*">&times;</button>
+        <button class="number-btn">1</button>
+        <button class="number-btn">2</button>
+        <button class="number-btn">3</button>
+        <button class="key--operator" value="/">÷</button>
+        <button class="number-btn">0</button>
+        <button class="decimal">.</button>
+        <button class="key--equal span2" value="=">=</button>
+      </div>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
