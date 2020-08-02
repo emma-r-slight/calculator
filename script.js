@@ -3,7 +3,7 @@ let calcArray = [];
 // const numBtn = document.querySelectorAll('.number-btn');
 let screen = document.querySelector('.screen');
 
-const calculator = document.querySelector('.calculator');
+const calculator = document.querySelector('#calculator');
 //using event "bubbling" get all calculator buttons
 const keys = document.querySelector('.calculator-keys');
 
@@ -20,7 +20,23 @@ keys.addEventListener('click', (e) => {
   const operand = clicked.dataset.action;
   const keyValue = clicked.textContent;
   const currentNum = screen.textContent;
-  // const previousKeyType = calculator.dataset.previousKeyType;
+  const previousKeyType = calculator.dataset.previousKeyType;
+
+  const calculateValue = (num1, operand, num2) => {
+    let result = '';
+
+    if (operand === '+') {
+      result = parseFloat(num1) + parseFloat(num2);
+    } else if (operand === '-') {
+      result = parseFloat(num1) - parseFloat(num2);
+    } else if (operand === '*') {
+      result = parseFloat(num1) * parseFloat(num2);
+    } else if (operand === '/');
+    {
+      result = parseFloat(num1) / parseFloat(num2);
+    }
+    return result;
+  };
 
   Array.from(clicked.parentNode.children).forEach((btn) =>
     btn.classList.remove('is-depressed')
@@ -28,7 +44,8 @@ keys.addEventListener('click', (e) => {
 
   if (clicked.matches('button')) {
     if (!operand) {
-      if (currentNum === '0' || previousKeyType === calcKey) {
+      if (currentNum === '0' || previousKeyType === 'operator') {
+        //
         screen.textContent = keyValue;
       } else {
         screen.textContent = currentNum + keyValue;
@@ -43,36 +60,19 @@ keys.addEventListener('click', (e) => {
       operand === '*' ||
       operand === '/'
     ) {
-      keyValue.classList.add('.is-depressed');
+      console.log(operand);
+      clicked.classList.add('.is-depressed');
 
-      calculator.dataset.previousKeyType = 'calcKey';
+      calculator.dataset.previousKeyType = 'operator';
       calculator.dataset.firstValue = currentNum;
-      calculator.dataset.calcKey = operator;
+      calculator.dataset.operator = operand;
     }
     if (operand === 'calculate') {
       const secondValue = currentNum;
       const firstValue = calculator.dataset.firstValue;
-      const operator = calculator.dataset.operator;
+      // const operator = calculator.dataset.operator;
 
-      if (firstValue && operator && previousKeyType != 'operator') {
-        screen.textContent = calculate(firstValue, operator, secondValue);
-      }
-
-      const calculate = (num1, operator, num2) => {
-        let result = '';
-
-        if (operand === '+') {
-          result = parseFloat(n1) + parseFloat(n2);
-        } else if (operand === '-') {
-          result = parseFloat(n1) - parseFloat(n2);
-        } else if (operand === '*') {
-          result = parseFloat(n1) * parseFloat(n2);
-        } else if (operand === '/');
-        {
-          result = parseFloat(n1) / parseFloat(n2);
-        }
-        return result;
-      };
+      screen.textContent = calculateValue(firstValue, operand, secondValue);
     }
   }
 });
